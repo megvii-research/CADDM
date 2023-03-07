@@ -66,7 +66,6 @@ def test():
         labels = labels.long()
 
         outputs = net(batch_data)
-        outputs = F.softmax(outputs, dim=-1)[:, 1]
         pred_list.extend(outputs.detach().cpu().numpy().tolist())
         label_list.extend(labels.detach().cpu().numpy().tolist())
 
