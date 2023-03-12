@@ -48,8 +48,8 @@ In this work, we take a deep look into the generalization ability of binary clas
         │               └── *.mp4
         ├── manipulated_sequences
         │   ├── Deepfakes
-        │		├── raw
-        │			└── videos
+        │       └── raw
+        │           └── videos
         │               └── *.mp4
         │   ├── Face2Face
         │		...
