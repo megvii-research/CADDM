@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 import model
 from detection_layers.modules import MultiBoxLoss
 from dataset import DeepfakeDataset
-from lib.util import load_config, update_learning_rate, my_collate
+from lib.util import load_config, update_learning_rate, my_collate, get_video_auc
 
 
 def args_func():
@@ -58,19 +58,25 @@ def test():
                              )
 
     # start testing.
-    pred_list = list()
-    label_list = list()
+    frame_pred_list = list()
+    frame_label_list = list()
+    video_name_list = list()
+
     for batch_data, batch_labels in test_loader:
 
-        labels = batch_labels
+        labels, video_name = batch_labels
         labels = labels.long()
 
         outputs = net(batch_data)
-        pred_list.extend(outputs.detach().cpu().numpy().tolist())
-        label_list.extend(labels.detach().cpu().numpy().tolist())
+        outputs = outputs[:, 1]
+        frame_pred_list.extend(outputs.detach().cpu().numpy().tolist())
+        frame_label_list.extend(labels.detach().cpu().numpy().tolist())
+        video_name_list.extend(list(video_name))
 
-    auc = roc_auc_score(label_list, pred_list)
-    print(f"AUC of {cfg['dataset']['name']} is {auc:.4f}")
+    f_auc = roc_auc_score(frame_label_list, frame_pred_list)
+    v_auc = get_video_auc(frame_label_list, video_name_list, frame_pred_list)
+    print(f"Frame-AUC of {cfg['dataset']['name']} is {f_auc:.4f}")
+    print(f"Video-AUC of {cfg['dataset']['name']} is {v_auc:.4f}")
 
 
 if __name__ == "__main__":

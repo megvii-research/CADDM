@@ -19,7 +19,7 @@ def get(pretrained_model=None, backbone='efficientnet-b4'):
 
     if pretrained_model:
         checkpoint = torch.load(pretrained_model)
-        model.load_state_dict(checkpoint)
+        model.load_state_dict(checkpoint['network'])
     return model
 
 
