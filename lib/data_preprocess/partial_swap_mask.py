@@ -101,7 +101,7 @@ def generate_partial_swap_mask(
 
     bbox = _sliding_bbox(dssim, h, w)
     bbox_mask = np.zeros(srcRgb.shape)
-    bbox_mask[y0+bbox[0]:y0+bbox[2], x0+bbox[1]:x0+bbox[3], :] = 1
+    bbox_mask[y0+bbox[0]:y0+bbox[2], x0+bbox[1]:x0+bbox[3], :] = 255
 
     return bbox_mask, bbox
 
