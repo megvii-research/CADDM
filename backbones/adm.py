@@ -92,7 +92,7 @@ class Multi_scale_Detection_Module(nn.Module):
 
         for extra_block in extra_layers:
             ks = 3 if extra_block != ADM_EndBlock else 1
-            pad = 1 if extra_block != ADM_EndBlock else False
+            pad = 1 if extra_block != ADM_EndBlock else 0
 
             multi_scale_classifier.append(
                 nn.Conv2d(
