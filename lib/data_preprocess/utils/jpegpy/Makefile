@@ -1,6 +1,6 @@
 CXXFLAGS =-std=c++11 \
-		  -O3 $(shell pkg-config --cflags libjpeg) $(shell mdl python3-config --cflags) -UNDEBUG
-LDFLAGS = $(shell pkg-config --libs libjpeg) $(shell mdl python3-config --ldflags)
+		  -O3 $(shell pkg-config --cflags libjpeg) $(shell python3-config --cflags) -UNDEBUG
+LDFLAGS = $(shell pkg-config --libs libjpeg) $(shell python3-config --ldflags)
 
 CXX_SOURCES = _jpegpy.cc
 
